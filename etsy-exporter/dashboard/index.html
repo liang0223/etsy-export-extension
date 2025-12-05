@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Etsy 订单导出助手</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="logo">Etsy 导出助手</div>
+      <nav class="menu">
+        <div class="menu-item active" data-page="orders">订单列表</div>
+        <div class="menu-item" data-page="template">模板设置</div>
+        <div class="menu-item" data-page="help">使用说明</div>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <!-- 订单列表 -->
+      <section id="page-orders" class="page page-active">
+        <header class="page-header">
+          <h2>订单列表</h2>
+          <button id="btnExportCsv" class="btn-primary">
+            按当前模板导出 CSV
+          </button>
+        </header>
+        <div id="orders-info" class="page-tip"></div>
+        <div class="table-wrapper">
+          <table id="orders-table">
+            <thead id="orders-thead"></thead>
+            <tbody id="orders-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 模板设置 -->
+      <section id="page-template" class="page">
+        <header class="page-header">
+          <h2>模板设置</h2>
+        </header>
+        <p class="page-tip">
+          左边为可选字段，右边为导出字段和顺序。按住 Ctrl 键点击可多选。
+        </p>
+
+        <div class="template-container">
+          <div class="template-column">
+            <div class="template-title">可选字段</div>
+            <select id="tmpl-available" multiple></select>
+          </div>
+
+          <div class="template-actions">
+            <button id="tmpl-add">&gt;&gt;</button>
+            <button id="tmpl-remove">&lt;&lt;</button>
+            <button id="tmpl-reset">恢复默认</button>
+          </div>
+
+          <div class="template-column">
+            <div class="template-title">已选字段（导出顺序）</div>
+            <!-- 用 ul + li 做拖拽列表 -->
+            <ul id="tmpl-selected" class="tmpl-list"></ul>
+          </div>
+        </div>
+
+        <button id="tmpl-save" class="btn-primary" style="margin-top:16px;">
+          保存模板
+        </button>
+        <div id="tmpl-status" class="page-tip"></div>
+      </section>
+
+      <!-- 帮助页面 -->
+      <section id="page-help" class="page">
+        <header class="page-header">
+          <h2>使用说明</h2>
+        </header>
+        <ol class="help-list">
+          <li>打开 Etsy 后台的 <b>Orders</b> 页面。</li>
+          <li>右上角看到 “<b>E 导出</b>” 按钮。</li>
+          <li>点击按钮，插件会读取当前页面的订单，并打开本页面。</li>
+          <li>在「模板设置」里选择需要导出的字段并保存。</li>
+          <li>返回「订单列表」，点击「按当前模板导出 CSV」即可下载文件。</li>
+          <li>
+            本插件只在本地浏览器读取数据，不会修改订单，也不会上传到任何服务器。
+          </li>
+        </ol>
+      </section>
+    </main>
+  </div>
+
+  <script src="../fields.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
